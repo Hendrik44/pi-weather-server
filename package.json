@@ -1,0 +1,20 @@
+{
+  "name": "pi-weather-webserver",
+  "version": "1.0.0",
+  "description": "Use your raspberry as Weahterstation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hendrik Jürst",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "dateformat": "^1.0.11",
+    "express": "^4.13.3",
+    "i2c": "^0.2.1",
+    "mysql": "^2.9.0",
+    "node-dht-sensor": "0.0.8",
+    "underscore": "^1.8.3"
+  }
+}
