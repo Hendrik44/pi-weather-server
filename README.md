@@ -84,8 +84,7 @@ Install script is comming ....
 12. install pm2 to run weather-server as service on startup
 	```
 	sudo npm install pm2 -g
-	``
-	
+	```	
 	```
 	sudo pm2 startup systemd -u root
 	```
