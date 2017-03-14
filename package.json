@@ -1,7 +1,7 @@
 {
   "name": "pi-weather-webserver",
   "version": "1.0.0",
-  "description": "Use your raspberry as Weahterstation",
+  "description": "Build your own weatherstation with your raspberry",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
