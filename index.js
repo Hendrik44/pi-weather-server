@@ -57,12 +57,12 @@ app.get('/api/live/sensor', function(req, res)
 	res.type('application/json');
 	res.status(200);
 	res.json(
-	[{
+	{
 		"temperature": temp,
 		"pressure": pressure,
 		"humidity": humidity,
 		"time": time
-	}]);
+	});
 });
 
 app.get('/api/live/sensor/temperature', function(req, res)
@@ -98,31 +98,31 @@ app.get('/api/history/sensor', function(req, res)
 
 app.get('/api/history/sensor/temperature', function(req, res)
 {
-	connection.query('SELECT time, temperature FROM `data_log`', function (err, results, fields) {
+	connection.query('SELECT UNIX_TIMESTAMP(time) AS time, temperature FROM `data_log`', function (err, results, fields) {
 		if (err) throw err;
 		res.type('application/json');
 		res.status(200);
-		res.json(results);
+		res.json({data: results});
 	});
 });
 
 app.get('/api/history/sensor/humidity', function(req, res)
 {
-	connection.query('SELECT time, humidity FROM `data_log`', function (err, results, fields) {
+	connection.query('SELECT UNIX_TIMESTAMP(time) AS time, humidity FROM `data_log`', function (err, results, fields) {
 		if (err) throw err;
 		res.type('application/json');
 		res.status(200);
-		res.json(results);
+		res.json({data: results});
 	});
 });
 
 app.get('/api/history/sensor/pressure', function(req, res)
 {
-	connection.query('SELECT time, pressure FROM `data_log`', function (err, results, fields) {
+	connection.query('SELECT UNIX_TIMESTAMP(time) AS time, pressure FROM `data_log`', function (err, results, fields) {
 		if (err) throw err;
 		res.type('application/json');
 		res.status(200);
-		res.json(results);
+		res.json({data: results});
 	});
 });
 
