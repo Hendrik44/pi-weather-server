@@ -47,7 +47,7 @@ Create table data_log(time TIMESTAMP NOT NULL, temperature FLOAT NOT NULL, humid
 
 # install node depencies
 sudo npm install pm2 -g
-sudo pm2 startup systemd -u pi
+sudo pm2 startup systemd -u root
 
 #configure auto update raspbian
 #sudo apt-get install cron-apt > /dev/null
