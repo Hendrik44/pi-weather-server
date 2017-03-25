@@ -12,9 +12,9 @@
     "body-parser": "^1.14.1",
     "dateformat": "^1.0.11",
     "express": "^4.13.3",
-    "i2c": "^0.2.1",
+    "i2c": "0.2.3",
     "mysql": "^2.9.0",
-    "node-dht-sensor": "0.0.8",
+    "node-dht-sensor": "0.0.32",
     "underscore": "^1.8.3"
   }
 }
