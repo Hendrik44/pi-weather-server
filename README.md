@@ -4,9 +4,9 @@ A small powerfull weather-station for the raspberrypi based on nodejs combined w
 The App can you find here: comming soon...
 
 ## Requirements
-* RaspberryPi 2/3 with raspbian jessy
+* RaspberryPi 2/3 or Zero W with raspbian jessy
 * DHT22, BMP180 Sensor and cables
-* Nodejs v0.12.7 with some dependencys (package.json)
+* Nodejs v6 and some dependencys (package.json)
 * MySQL-Database
 
 
@@ -21,9 +21,11 @@ Install script is comming ....
 3. enable i2c with raspi-config
 4. exit raspi-config and reboot
 5. check resized filesystem using the whole sd-card with ``` df -h ```
-6. clone repo to your raspberry
+6. Install git if not installed & cloning repo
 	```
+	sudo apt-get -y install vim git-core
 	git clone https://github.com/Hendrik44/pi-weather-server.git
+	cd pi-weather-server
 	```	
 7. run install script
 	```
@@ -33,7 +35,7 @@ Install script is comming ....
 9. run pi-weather (need to run with root-permission, because server is need hardware-access)
 	
 	```
-	sudo pm2 start index.js --watch
+	sudo pm2 start index.js --name pi-weather
 	```
 10. add server to automatically run on bootup
 	```
