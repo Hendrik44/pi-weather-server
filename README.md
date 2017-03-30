@@ -1,3 +1,4 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/hendrik44/pi-weather-server/badge.svg)](https://snyk.io/test/github/hendrik44/pi-weather-server)
 # Pi-Weather web-server
 A small powerfull weather-station for the raspberrypi based on nodejs combined with a cool iOS-App to show realtime-data, history in charts and more.
 
