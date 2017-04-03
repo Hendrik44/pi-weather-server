@@ -198,6 +198,9 @@ var sensor = {
 var log_Data = {
 	save: function()
 	{
+		var date= new Date();
+	        time = dateFormat(date, 'dd.mm.yyyy HH:MM:ss');
+		
 		console.log("Logtimer: " + logTimer);
 		if (logTimer<10)
 		{
@@ -213,9 +216,6 @@ var log_Data = {
 			create internal timestamp
 			
 		*/
-		var date= new Date();
-        time = dateFormat(date, 'dd.mm.yyyy HH:MM:ss');
-        
         /*
 	        
 	        save data to db
