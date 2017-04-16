@@ -62,5 +62,7 @@ all history data from database a completely removed
 [http://raspberrypi:3000/api/history/delete](http://raspberrypi:3000/history/log) 
 	
 ## Credits and Licenses
-This project was a part of my bachelor thesis and now opensource see LICENSE file. 
+Copyright (c) 2017 Hendrik Jürst
+
+This project was a part of my bachelor thesis and after some refactoring its now opensource licensed under MIT. For more see License-File. 
 
