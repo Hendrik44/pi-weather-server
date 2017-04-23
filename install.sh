@@ -1,13 +1,23 @@
 #!/bin/sh
+if [ ! $( id -u ) -eq 0 ]; then
+    echo "ERROR: Please run the script as root" ;exit 1
+fi
+
 echo "Update System..."
-sudo apt-get -y update > /dev/null
-sudo apt-get -y upgrade > /dev/null
-sudo apt-get -y dist-upgrade > /dev/null
-sudo apt-get -y autoremove > /dev/null
+apt-get -y update > /dev/null
+apt-get -y upgrade > /dev/null
+apt-get -y dist-upgrade > /dev/null
+apt-get -y autoremove > /dev/null
 echo "Updating System finished"
 
 echo "install required software"
-sudo apt-get -y install vim git-core i2c-tools unzip zip  > /dev/null
+apt-get -y install vim git-core i2c-tools unzip zip  > /dev/null
+
+echo "changing hostname to pi-weather.."
+hostn=$(cat /etc/hostname)
+#change hostname in /etc/hosts & /etc/hostname
+sed -i "s/$hostn/pi-weather/g" /etc/hosts
+sed -i "s/$hostn/pi-weather/g" /etc/hostname
 
 #install bcm2835 library for dht-sensor
 echo "install bcm2835 library for dht-sensor"
@@ -16,8 +26,8 @@ tar zxvf bcm2835-1.52.tar.gz
 cd bcm2835-1.52
 ./configure
 make
-sudo make check 
-sudo make install
+make check 
+make install
 cd
 rm -rf bcm2835-1.52
 rm bcm2835-1.52.tar.gz
@@ -35,19 +45,19 @@ echo "Installing nodejs..."
 wget https://nodejs.org/dist/v6.10.1/node-v6.10.1-linux-$("arch").tar.gz
 tar -xvf node-v6.10.1-linux-$("arch").tar.gz
 cd node-v6.10.1-linux-$("arch")
-sudo cp -R * /usr/local
+cp -R * /usr/local
 rm node-v6.10.1-linux-armv6l.tar.gz
 rm -rf node-v6.10.1-linux-armv6l
 
 #install mysql
 echo "Installing MySQL-Database..."
-sudo apt-get install -y mysql-server
+apt-get install -y mysql-server  > /dev/null 
 echo "create database pi_weather" | mysql -u root -p
 echo "USE pi_weather; Create table data_log(time TIMESTAMP NOT NULL, temperature FLOAT NOT NULL, humidity FLOAT NOT NULL, pressure DOUBLE NOT NULL);" | mysql -u root -p
 
 # install node depencies
-sudo npm install pm2 -g
-sudo pm2 startup systemd -u root
+npm install pm2 -g
+pm2 startup systemd -u root
 
 # Installing repo and configure server
 git clone https://github.com/Hendrik44/pi-weather-server.git
