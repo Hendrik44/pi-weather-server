@@ -52,12 +52,10 @@ var logTimer = 10;
 	set routes for web-interface
 */
 
-app.get('/api/live/sensor', function(req, res)
-{
+app.get('/api/live/sensor', function(req, res) {
 	res.type('application/json');
 	res.status(200);
-	res.json(
-	{
+	res.json({
 		"temperature": temp,
 		"pressure": pressure,
 		"humidity": humidity,
@@ -65,29 +63,25 @@ app.get('/api/live/sensor', function(req, res)
 	});
 });
 
-app.get('/api/live/sensor/temperature', function(req, res)
-{
+app.get('/api/live/sensor/temperature', function(req, res) {
 	res.type('application/json');
 	res.status(200);
 	res.json({"temperature": temp, "time": time});
 });
 
-app.get('/api/live/sensor/humidity', function(req, res)
-{
+app.get('/api/live/sensor/humidity', function(req, res) {
 	res.type('application/json');
 	res.status(200);
 	res.json({"humidity": humidity, "time": time});
 });
 
-app.get('/api/live/pressure', function(req, res)
-{
+app.get('/api/live/pressure', function(req, res) {
 	res.type('application/json');
 	res.status(200);
 	res.json({"pressure": pressure, "time": time});
 });
 
-app.get('/api/history/sensor', function(req, res)
-{
+app.get('/api/history/sensor', function(req, res) {
 	connection.query('SELECT * FROM `data_log`', function (err, results, fields) {
 		if (err) throw err;
 		res.type('application/json');
@@ -96,8 +90,7 @@ app.get('/api/history/sensor', function(req, res)
 	});
 });
 
-app.get('/api/history/sensor/temperature', function(req, res)
-{
+app.get('/api/history/sensor/temperature', function(req, res) {
 	connection.query('SELECT UNIX_TIMESTAMP(time) AS time, temperature FROM `data_log`', function (err, results, fields) {
 		if (err) throw err;
 		res.type('application/json');
@@ -106,8 +99,7 @@ app.get('/api/history/sensor/temperature', function(req, res)
 	});
 });
 
-app.get('/api/history/sensor/humidity', function(req, res)
-{
+app.get('/api/history/sensor/humidity', function(req, res) {
 	connection.query('SELECT UNIX_TIMESTAMP(time) AS time, humidity FROM `data_log`', function (err, results, fields) {
 		if (err) throw err;
 		res.type('application/json');
@@ -116,8 +108,7 @@ app.get('/api/history/sensor/humidity', function(req, res)
 	});
 });
 
-app.get('/api/history/sensor/pressure', function(req, res)
-{
+app.get('/api/history/sensor/pressure', function(req, res) {
 	connection.query('SELECT UNIX_TIMESTAMP(time) AS time, pressure FROM `data_log`', function (err, results, fields) {
 		if (err) throw err;
 		res.type('application/json');
@@ -126,8 +117,7 @@ app.get('/api/history/sensor/pressure', function(req, res)
 	});
 });
 
-app.get('/api/history/delete', function(req, res)
-{
+app.get('/api/history/delete', function(req, res) {
     connection.query('DELETE FROM `data_log` WHERE 1', function (err, results, fields) {
         if (err) throw err;
 		logTimer = 10;		
@@ -140,8 +130,7 @@ app.get('/api/history/delete', function(req, res)
 });
 
 
-app.get('/api/control/shutdown', function(req, res)
-{		
+app.get('/api/control/shutdown', function(req, res) {		
 	res.type('application/json');
 	res.status(200);
 	res.json('{"status" : "ok"}');
@@ -149,8 +138,7 @@ app.get('/api/control/shutdown', function(req, res)
 	process.exit();
 });
 
-app.get('/api/control/reboot', function(req, res)
-{		
+app.get('/api/control/reboot', function(req, res) {		
 	res.type('application/json');
 	res.status(200);
 	res.json('{"status" : "ok"}');
@@ -160,13 +148,13 @@ app.get('/api/control/reboot', function(req, res)
 
 
 //Error-Handling
-app.use(function(req,res){
+app.use(function(req,res) {
 	res.type('text/plain');
 	res.status(404);
 	res.send('404 - Not Found');
 });
 
-app.use(function(err, req, res, next){
+app.use(function(err, req, res, next) {
 	res.type('text/plain');
 	res.status(500);
 	res.send('500 - Internal error: ' + err);
@@ -242,8 +230,7 @@ var log_Data = {
 }
 
 //BMP180/085
-function read_pressure()
-{
+function read_pressure() {
 	barometer.read(function (data) {
 	    console.log("Temperature:", data.temperature);
 	    console.log("Pressure:", data.pressure);
@@ -278,29 +265,3 @@ setInterval(function(){
 app.listen(3000);
 console.log("Server running at http://127.0.0.1:3000/");
 
-
-/*
-	Exit Handler to close DB-Connection
-*/
-/*
-function exitHandler(options, err) {
-	if(connection_closed == false)
-	{
-		connection.end();
-		connection_closed = true;
-	    console.log('close DB');
-	}
-    if (options.cleanup) console.log('clean');
-    if (err) console.log(err.stack);
-    if (options.exit) process.exit();
-}
-
-//do something when app is closing
-process.on('exit', exitHandler.bind(null,{cleanup:true}));
-
-//catches ctrl+c event
-process.on('SIGINT', exitHandler.bind(null, {exit:true}));
-
-//catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
-*/
